@@ -1,0 +1,10 @@
+torch==1.4.0
+pytorch-pretrained-bert==0.6.2
+jieba==0.37
+pypinyin==0.37.0
+numpy==1.18.1
+fasttext==0.9.1
+gensim==3.8.1
+mafan==0.3.1
+editdistance==0.5.3
+multiprocess==0.70.9

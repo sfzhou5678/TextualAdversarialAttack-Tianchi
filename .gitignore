@@ -2,9 +2,4 @@
 /data/materials
 draft*
 
-/identification/outputs
-
-*.json
-*.txt
-*.pkl
-*.bin
+/logs
