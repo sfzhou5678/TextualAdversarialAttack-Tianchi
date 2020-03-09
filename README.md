@@ -1,6 +1,6 @@
 # 安全AI挑战者计划 - 文本分类对抗攻击 - 解决方案
 
-​	[此repo](https://github.com/sfzhou5678/TextualAdversarialAttack-Tianchi)是我在[安全AI挑战者计划第三期 - 文本分类对抗攻击](https://tianchi.aliyun.com/markets/tianchi/AIC)比赛中的参赛代码，线上得分312.76, 线上排名12/1175。
+​	[此repo](https://github.com/sfzhou5678/TextualAdversarialAttack-Tianchi)是我在[安全AI挑战者计划第三期 - 文本分类对抗攻击](https://tianchi.aliyun.com/competition/entrance/231762/introduction)比赛中的参赛代码，线上得分312.76, 线上排名12/1175。
 
 ​	本次比赛的任务为中文场景下的**辱骂场景对抗攻击**：基于辱骂文本生成对抗样本，使模型识别错误，同时扰动较小，并且不影响辱骂性质。举例来说,本方案可实现如下形式的转换：
 
@@ -38,7 +38,7 @@
 
 ​	本方案收集了2000W微博评论语料和[骂人宝典](https://nmsl.shadiao.app/?from_shadiao)中的脏话语料，然后以脏话语料为基础迭代式地训练和构建本地测评数据集：用脏话预料+随机负采样的方式训练bert模型，然后遍历微博语料输出候选脏话数据，通过人工辨别确定新的脏话数据，并进行下一轮迭代。
 
-​	最终产生的脏话语料**data/obscenities.txt**包含1817条辱骂文本。
+​	最终产生的脏话语料[data/obscenities.txt](data/obscenities.txt)包含1817条辱骂文本。
 
 
 
@@ -48,7 +48,7 @@
 
 ​	另外考虑到线上模型部署了新词挖掘机制来防御新出现的黑词，本方案还设计了**抗"挖掘防御机制"机制**进行对抗。	
 
-​	整体流程位于**attackers.py**文件中。
+​	整体流程位于[attackers.py](attackers.py)文件中。
 
 ### 1. 目标token选择
 
@@ -66,9 +66,12 @@
 
 ### 2. 关键词替换
 
-​	本方案所有替换手段集中在**manipulate**目录下。给定的tokens序列以及需要进行替换的token，可通过以下方法产生攻击本文。
+​	本方案所有替换手段集中在[manipulate](manipulate)目录下。给定的tokens序列以及需要进行替换的token，可通过以下方法产生攻击本文。
 
-<center><b>表1. 关键词替换手段汇总表</center> 
+
+
+**表1. 关键词替换手段汇总表**
+
 |      类名      |                      基本思想                       |       示例       |                             备注                             |
 | :------------: | :-------------------------------------------------: | :--------------: | :----------------------------------------------------------: |
 |    Phonetic    |       将中文字符转换成对应的拼音或拼音首字母        |     你-> ni      |                                                              |
@@ -120,7 +123,7 @@ soft_scores *= freq_weights
 
 ## 使用方法
 
-1. 下载防御模型和embeddings，置于data目录(下载链接: https://pan.baidu.com/s/1gND7VQdRLpdaqM_kMxVhXg 提取码：qd8g)，如下图所示。
+1. 下载防御模型和embeddings，置于[data](data)目录(下载链接: https://pan.baidu.com/s/1gND7VQdRLpdaqM_kMxVhXg 提取码：qd8g)，如下图所示。
 
 ![](data/imgs/materials.png)
 
@@ -128,7 +131,7 @@ soft_scores *= freq_weights
    pip install --no-cache-dir -r requirements.txt
    ```
 
-3. 运行main.py，对data/obscenities.txt中包含的原始辱骂文本进行攻击。
+3. 运行[main.py](main.py)，对[data/obscenities.txt](data/obscenities.txt)中包含的原始辱骂文本进行攻击。
 
-4. 在根目录的adversarial.txt内查看输出结果。
+4. 在根目录的[adversarial.txt](adversarial.txt)内查看输出结果。
 
