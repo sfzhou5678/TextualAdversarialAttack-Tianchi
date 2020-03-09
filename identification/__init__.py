@@ -1,0 +1,1 @@
+from identification.black_box import SingleCharIdentification
